@@ -3,12 +3,30 @@ import os
 import glob
 import os.path
 
+
+search_list = []
+
+def get_files_name(files):
+    array = files
+    search_list = []
+    search_name = input('Введите текст для поиска: ')
+
+    for file in array:
+        with open(file) as f:
+            if search_name in f.read():
+                search_list.append(f.name)
+                print('{}'.format(f.name.split('Migrations/')[1]))
+
+    print('Кол-во файлов: {}'.format(len(search_list)))
+    get_files_name(search_list)
+
+
+
+
+
 migrations = 'Migrations'
-
 files = glob.glob(os.path.join(migrations, "*.sql"))
-
-for file in files:
-    print(file)
+get_files_name(files)
 
 
 
